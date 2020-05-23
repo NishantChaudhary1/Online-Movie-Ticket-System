@@ -1,0 +1,61 @@
+<!-- User Navbar -->
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <a class="navbar-brand" [routerLink]="['/user']" routerLinkActive="router-link-active">Movies</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/user']" routerLinkActive="router-link-active"  
+              >Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/user/searchCity']" routerLinkActive="router-link-active">Search City</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/user/searchTheater']" routerLinkActive="router-link-active">Search Theater</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="router-link">Location:Delhi NCR</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/movie']" routerLinkActive="router-link-active">Admin</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<!-- /End NavBar -->
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-4 d-flex mx-auto my-5" *ngFor="let movie of moviesList">
+        <!--Card-->
+    <div class="card card-cascade wider mb-2">
+
+        <!--Card image-->
+        <div class="view view-cascade">
+          <img  (click)="onSelect(movie)" src={{movie.movieImg}} class="card-img-top" style="width: 100%; height: 25vw;">
+        </div>
+        <!-- object-fit: cover; -->
+        <!--/Card image-->
+  
+        <!--Card content-->
+        <div class="card-body card-body-cascade text-center">
+          <!--Title-->
+          <h4 class="card-title"><strong>{{ movie.movieName }}</strong></h4>
+          <h6 class="indigo-text"><strong>{{ movie.movieDirector }}</strong></h6>
+          <p class="card-text">{{ movie.movieDescription }}</p>
+          <div class="center" (click)="onSelect(movie)" ><button class="btn btn-primary mb-2">Show</button></div>
+        </div>
+        <!--/.Card content-->
+  
+      </div>
+      <!--/.Card-->
+      </div>
+    </div>
+  </div>
+  

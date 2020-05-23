@@ -1,0 +1,73 @@
+<!-- User Navbar -->
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <a class="navbar-brand" [routerLink]="['/user']" routerLinkActive="router-link-active">Movies</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/user']" routerLinkActive="router-link-active"  
+                >Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/user/searchCity']" routerLinkActive="router-link-active">Search City</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/user/searchTheater']" routerLinkActive="router-link-active">Search Theater</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <!-- /End NavBar -->
+
+  
+    <div class="text-light align-center">
+        <p><b>{{errorMsg}}</b></p>
+    </div>
+
+  <!-- Movie Details -->
+  <div class="container">
+    <table class="table table-striped text-light">
+      <thead>
+      <tr>
+        <th>Poster</th>
+        <th>Director</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr class="text-light">
+          <td style="width: 20%">{{movie.movieName }}</td>
+          <td style="width: 20%">{{ movie.movieDirector }}</td>
+          <td style="width: 20%">{{ movie.movieDescription }}</td>
+          <td style="width: 40%"><img src="{{ movie.movieImg }}" alt="Movie Poster"></td>        
+         </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+<!-- List of all shows -->
+    <div class="container">
+      <table class="table table-striped text-light">
+        <thead>
+        <tr>
+          <th>Show Id</th>
+          <th>Show Time</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-light" *ngFor="let show of shows">
+          <td>{{ show.show_Id}}</td>
+          <td>{{ show.show_time }}</td>
+          <td><button class="btn btn-primary mb-2 rounded" >Book</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>

@@ -1,0 +1,130 @@
+<!-- User Navbar -->
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <a class="navbar-brand" [routerLink]="['/admin/movie']" routerLinkActive="router-link-active">Admin Panel</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin/movie']" routerLinkActive="router-link-active"  
+                >Movie</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin/theater']" routerLinkActive="router-link-active">Theater</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin/city']" routerLinkActive="router-link-active">City</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin/show']" routerLinkActive="router-link-active">Show</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/user']" routerLinkActive="router-link-active">User Movies</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <!-- /End NavBar -->
+
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+        <span class="anchor" id="formContact"></span>
+        <hr class="my-5">
+
+        <!-- form Add Movie -->
+        <div class="card card-outline-secondary">
+            <div class="card-header">
+                <h3 class="mb-0">Add Movie</h3>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="myForm" (ngSubmit)="submitForm(myForm)" class="form" role="form">
+                    <fieldset>
+                        <label for="FormInputGroup" class="mb-0">Name</label>
+                        <div class="row mb-1">
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control mb-2" id="FormInput" placeholder="Movie name" 
+                        formControlName="movieName">
+                        <div class="error" *ngIf="myForm.get('movieName').hasError('required') && myForm.get('movieName').touched">
+                            <small class="text-danger" >Name is required!</small>
+                        </div>
+                        </div>
+                    </div>
+                        <label for="FormInputGroup" class="mb-0">Director</label>
+                        <div class="row mb-1">
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control mb-2" id="FormInput" placeholder="Director Name"
+                        formControlName="movieDirector">
+                                <div class="error" *ngIf="myForm.get('movieDirector').hasError('required') && myForm.get('movieDirector').touched">
+                                    <small class="text-danger" >Director Name is required</small>
+                                </div>
+                            </div>
+                        </div> 
+                        <label for="FormInputGroup" class="mb-0">Descrption</label>
+                        <div class="row mb-1">
+                            <div class="col-lg-12">
+                                <textarea rows="4" formControlName="movieDescription" id="FormInput" class="form-control mb-2"></textarea>
+                                <div class="error" *ngIf="myForm.get('movieDescription').hasError('required') && myForm.get('movieDescription').touched">
+                                    <small class="text-danger" >Description is required</small>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="FormInputGroup" class="mb-0">Poster Link</label>
+                        <div class="row mb-1">
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control mb-2" id="FormInput" placeholder="Link"
+                        formControlName="movieImg">
+                                <div class="error" *ngIf="myForm.get('movieImg').hasError('required') && myForm.get('movieImg').touched">
+                                    <small class="text-danger" >Link is required</small>
+                                </div>
+                                <div class="error" *ngIf="myForm.get('movieImg').hasError('pattern') && myForm.get('movieImg').touched">
+                                    <small class="text-danger" >Invalid Link</small>
+                                </div>
+                            </div>
+                        </div>                       
+                        <button type="submit" class="btn btn-primary mb-2" [disabled]="!myForm.valid">Save</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <!-- /Theater form -->
+
+    </div>
+    <div class="text-light align-center">
+        <p><b>{{errorMsg}}</b></p>
+    </div>
+
+    <!-- Showing List of All theaters -->
+    <div class="row">
+        <table class="table table-hover text-light">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Movie Name</th>
+                    <th scope="col">Movie Director</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Poster</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-light" *ngFor="let movie of moviesList">
+                    <th scope="row">{{movie.movieId}}</th>
+                    <td style="width: 20%">{{movie.movieName }}</td>
+                    <td style="width: 20%">{{ movie.movieDirector }}</td>
+                    <td style="width: 20%">{{ movie.movieDescription }}</td>
+                    <td style="width: 20%"><img src="{{ movie.movieImg }}" alt="Movie Poster"></td>
+                    <td style="width: 30%">
+                        <span style="margin-right: 10px"><button (click)="edit(movie)"
+                                class="btn btn-primary mb-2">Edit</button> </span>
+                        <span><button (click)="delete(movie)" class="btn btn-primary mb-2">Delete</button></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
